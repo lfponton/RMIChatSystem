@@ -15,9 +15,8 @@ public class ChatApp extends Application
   {
     clientFactory = ClientFactory.getInstance();
     ModelFactory.getInstance();
-    ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
-    ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
-    viewHandler.start();
+    ViewModelFactory.getInstance();
+    ViewHandler.getInstance().start(stage);
   }
 
   @Override
