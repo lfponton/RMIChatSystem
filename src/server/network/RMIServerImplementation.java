@@ -1,7 +1,6 @@
 package server.network;
 
 import server.model.MessageSender;
-import server.model.MessageSenderManager;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
 import shared.transferobjects.Message;
@@ -45,7 +44,7 @@ public class RMIServerImplementation implements RMIServer
       @Override public void propertyChange(PropertyChangeEvent evt)
       {
         try {
-          clientCallback.update((String) evt.getNewValue());
+          clientCallback.newMessage((String) evt.getNewValue());
         } catch (RemoteException e) {
           e.printStackTrace();
           messageSender.removePropertyChangeListener("NewMessage", this);

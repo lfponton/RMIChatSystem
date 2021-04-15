@@ -78,7 +78,7 @@ public class RMIClient implements Client, ClientCallback
     return 0;
   }
 
-  @Override public void update(String str)
+  @Override public void newMessage(String str)
   {
     support.firePropertyChange("NewMessage", null, str);
   }
