@@ -17,7 +17,7 @@ public class ChatViewModel
     this.messageSender = messageSender;
     messages = new SimpleStringProperty();
     message = new SimpleStringProperty();
-    numberOfConnections = "1";
+    numberOfConnections = "";
     messageSender.addPropertyChangeListener("NewMessage", this::onNewMessage);
   }
 

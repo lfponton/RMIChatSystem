@@ -18,10 +18,7 @@ public class RMIClient implements Client, ClientCallback
   private String username;
   private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-  public RMIClient()
-  {
-
-  }
+  public RMIClient() {}
 
   public void startClient()
   {

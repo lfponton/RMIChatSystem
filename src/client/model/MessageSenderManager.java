@@ -29,7 +29,7 @@ public class MessageSenderManager implements MessageSender
     client.sendMessage(message);
   }
 
-  @Override public void createUser(String username)
+  @Override public void setUsername(String username)
   {
     client.setUsername(username);
   }

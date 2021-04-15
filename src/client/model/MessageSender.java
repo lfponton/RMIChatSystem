@@ -5,6 +5,6 @@ import shared.util.PropertyChangeSubject;
 public interface MessageSender extends PropertyChangeSubject
 {
   void sendMessage(String message);
-  void createUser(String username);
+  void setUsername(String username);
   int getNumberOfConnections();
 }

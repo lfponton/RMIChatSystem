@@ -16,14 +16,11 @@ public class ViewHandler
   private Stage stage;
   private Scene chatScene;
   private Scene userScene;
-  private ViewModelFactory viewModelFactory;
   private static ViewHandler instance;
   private static Lock lock = new ReentrantLock();
 
   private ViewHandler()
-  {
-    this.viewModelFactory = ViewModelFactory.getInstance();
-  }
+  {}
 
   public static ViewHandler getInstance()
   {

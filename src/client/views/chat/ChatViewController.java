@@ -18,6 +18,7 @@ public class ChatViewController implements ViewController
   public void sendMessageButton(ActionEvent evt)
   {
     chatViewModel.sendMessage();
+    messageField.clear();
   }
 
   public void numberOfConnections(ActionEvent evt) {

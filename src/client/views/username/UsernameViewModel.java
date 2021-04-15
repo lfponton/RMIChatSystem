@@ -11,6 +11,6 @@ public class UsernameViewModel
   }
 
   public void createUser(String username) {
-    messageSender.createUser(username);
+    messageSender.setUsername(username);
   }
 }
