@@ -5,7 +5,6 @@ import client.network.Client;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.RemoteException;
 
 public class MessageSenderManager implements MessageSender
 {

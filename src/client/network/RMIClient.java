@@ -53,7 +53,7 @@ public class RMIClient implements Client, ClientCallback
       {
         server.unregisterClient(this);
       } catch (RemoteException e) {
-
+        throw new RuntimeException("Could not contact server");
       }
   }
 
@@ -70,9 +70,8 @@ public class RMIClient implements Client, ClientCallback
     }
     catch (RemoteException e)
     {
-      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
     }
-    return 0;
   }
 
   @Override public void newMessage(String str)
