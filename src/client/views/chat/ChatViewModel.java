@@ -3,19 +3,24 @@ package client.views.chat;
 import client.model.MessageSender;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+import shared.transferobjects.Message;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeSupport;
+import java.util.List;
 
 public class ChatViewModel
 {
   private MessageSender messageSender;
-  private StringProperty message, messages;
+  private PropertyChangeSupport support = new PropertyChangeSupport(this);
+  private StringProperty message;
+  private List<Message> messages;
   private String numberOfConnections;
 
   public ChatViewModel(MessageSender messageSender)
   {
     this.messageSender = messageSender;
-    messages = new SimpleStringProperty();
     message = new SimpleStringProperty();
     numberOfConnections = "";
     messageSender.addPropertyChangeListener("NewMessage", this::onNewMessage);
@@ -23,7 +28,8 @@ public class ChatViewModel
 
   private void onNewMessage(PropertyChangeEvent evt)
   {
-    messages.setValue((String) evt.getNewValue());
+
+    messages = (List<Message>) evt.getNewValue();
   }
 
   public void sendMessage()
@@ -37,15 +43,18 @@ public class ChatViewModel
     return messageSender.getNumberOfConnections();
   }
 
-  public StringProperty getMessages()
-  {
-    return messages;
-  }
 
   public StringProperty getMessage()
   {
     return message;
   }
 
+  public List<Message> getMessages()
+  {
+    return messages;
+  }
 
+  public void loadMessages() {
+    List<Message> messageList = messageSender.getMessages();
+  }
 }

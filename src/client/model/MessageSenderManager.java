@@ -1,10 +1,12 @@
 package client.model;
 
 import client.network.Client;
+import shared.transferobjects.Message;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.List;
 
 public class MessageSenderManager implements MessageSender
 {
@@ -36,6 +38,11 @@ public class MessageSenderManager implements MessageSender
   @Override public int getNumberOfConnections()
   {
     return client.getNumberOfConnections();
+  }
+
+  @Override public List<Message> getMessages()
+  {
+    return client.getMessages();
   }
 
   @Override public void addPropertyChangeListener(String name,

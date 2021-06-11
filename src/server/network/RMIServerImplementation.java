@@ -13,6 +13,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RMIServerImplementation implements RMIServer
@@ -32,9 +33,9 @@ public class RMIServerImplementation implements RMIServer
     registry.bind("Server", this);
   }
 
-  @Override public String sendMessage(Message msg)
+  @Override public void sendMessage(Message msg)
   {
-    return messageSender.sendMessage(msg.toString());
+    messageSender.sendMessage(msg);
   }
 
   @Override public void registerClient(ClientCallback clientCallback)
@@ -44,7 +45,7 @@ public class RMIServerImplementation implements RMIServer
       @Override public void propertyChange(PropertyChangeEvent evt)
       {
         try {
-          clientCallback.newMessage((String) evt.getNewValue());
+          clientCallback.newMessage((List<Message>) evt.getNewValue());
         } catch (RemoteException e) {
           e.printStackTrace();
           messageSender.removePropertyChangeListener("NewMessage", this);
@@ -67,6 +68,11 @@ public class RMIServerImplementation implements RMIServer
   @Override public int getNumberOfConnections()
   {
     return listeners.size();
+  }
+
+  @Override public List<Message> getMessages() throws RemoteException
+  {
+    return messageSender.getMessages();
   }
 
 }

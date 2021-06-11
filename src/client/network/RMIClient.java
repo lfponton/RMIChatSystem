@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class RMIClient implements Client, ClientCallback
 {
@@ -74,9 +75,21 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void newMessage(String str)
+  @Override public List<Message> getMessages()
   {
-    support.firePropertyChange("NewMessage", null, str);
+    try
+    {
+      return server.getMessages();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public void newMessage(List<Message> messages)
+  {
+    support.firePropertyChange("NewMessage", null, messages);
   }
 
   @Override public void addPropertyChangeListener(String name,

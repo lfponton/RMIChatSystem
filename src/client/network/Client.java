@@ -1,6 +1,9 @@
 package client.network;
 
+import shared.transferobjects.Message;
 import shared.util.PropertyChangeSubject;
+
+import java.util.List;
 
 public interface Client extends PropertyChangeSubject
 {
@@ -9,4 +12,5 @@ public interface Client extends PropertyChangeSubject
   void unRegisterClient();
   void setUsername(String str);
   int getNumberOfConnections();
+  List<Message> getMessages();
 }
