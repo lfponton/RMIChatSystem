@@ -25,13 +25,13 @@ public class ChatViewController implements ViewController
   {
     chatViewModel.sendMessage();
     messageField.clear();
-    //messages = FXCollections.observableArrayList(chatViewModel.getMessages());
-    //chatBox.setItems(messages);
-    // TODO: Needs Observer Pattern because it does not update when other client sends message
+    System.out.println(chatViewModel.loadMessages());
   }
 
-  public void numberOfConnections(ActionEvent evt) {
-    numberOfConnections.setText(String.valueOf(chatViewModel.numberOfConnections()));
+  public void numberOfConnections(ActionEvent evt)
+  {
+    numberOfConnections
+        .setText(String.valueOf(chatViewModel.numberOfConnections()));
   }
 
   @Override public void init()
@@ -39,12 +39,11 @@ public class ChatViewController implements ViewController
     viewHandler = ViewHandler.getInstance();
     chatViewModel = ViewModelFactory.getInstance().getChatViewModel();
     messageField.textProperty().bindBidirectional(chatViewModel.getMessage());
-    if (chatViewModel.loadMessages() != null)
-    {
-      chatViewModel.loadMessages().addListener(
-          (ListChangeListener<? super Message>) observable -> onNewMessage(
-              observable.getList()));
-    }
+    messages = FXCollections.observableArrayList(chatViewModel.getMessages());
+    chatBox.setItems(messages);
+    chatViewModel.loadMessages().addListener(
+        (ListChangeListener<? super Message>) observable -> onNewMessage(
+            observable.getList()));
   }
 
   private void onNewMessage(ObservableList<? extends Message> list)

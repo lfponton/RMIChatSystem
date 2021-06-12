@@ -59,7 +59,7 @@ public class ChatViewModel
 
   public List<Message> getMessages()
   {
-    return messages;
+    return messageSender.getMessages();
   }
 
   public ObservableList<Message> loadMessages() {
