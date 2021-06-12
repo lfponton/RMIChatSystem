@@ -51,12 +51,6 @@ public class MessageSenderManager implements MessageSender
     support.addPropertyChangeListener(name, listener);
   }
 
-  @Override public void addPropertyChangeListener(
-      PropertyChangeListener listener)
-  {
-    support.addPropertyChangeListener(listener);
-  }
-
   @Override public void removePropertyChangeListener(String name,
       PropertyChangeListener listener)
   {

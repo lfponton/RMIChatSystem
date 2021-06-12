@@ -21,15 +21,6 @@ public class MessageSenderManager implements MessageSender
   @Override public void sendMessage(Message message)
   {
     messages.add(message);
-    /*
-    String result = "";
-    for (String m : messages)
-    {
-      result += m + "\n";
-    }
-
-     */
-
     support.firePropertyChange("NewMessage", null, messages);
   }
 
@@ -42,12 +33,6 @@ public class MessageSenderManager implements MessageSender
       PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(name, listener);
-  }
-
-  @Override public void addPropertyChangeListener(
-      PropertyChangeListener listener)
-  {
-    support.addPropertyChangeListener(listener);
   }
 
   @Override public void removePropertyChangeListener(String name,

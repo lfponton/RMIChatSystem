@@ -8,13 +8,15 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import shared.transferobjects.Message;
 
 public class ChatViewController implements ViewController
 {
   @FXML private TextField messageField;
-  @FXML private TextArea messagesArea;
   @FXML private Label numberOfConnections;
   @FXML private ListView<Message> chatBox;
   private ChatViewModel chatViewModel;
@@ -25,7 +27,6 @@ public class ChatViewController implements ViewController
   {
     chatViewModel.sendMessage();
     messageField.clear();
-    System.out.println(chatViewModel.loadMessages());
   }
 
   public void numberOfConnections(ActionEvent evt)

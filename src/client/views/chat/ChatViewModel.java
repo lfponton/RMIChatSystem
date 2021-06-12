@@ -9,14 +9,12 @@ import javafx.collections.ObservableList;
 import shared.transferobjects.Message;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatViewModel
 {
   private MessageSender messageSender;
-  private PropertyChangeSupport support = new PropertyChangeSupport(this);
   private StringProperty message;
   private String numberOfConnections;
   private ObservableList<Message> messages;
@@ -37,7 +35,6 @@ public class ChatViewModel
     Platform.runLater(() -> {
       messages.setAll(messageList);
     });
-
   }
 
   public void sendMessage()

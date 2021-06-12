@@ -1,6 +1,5 @@
 package shared.network;
 
-
 import shared.transferobjects.Message;
 
 import java.rmi.Remote;
