@@ -4,13 +4,12 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import shared.transferobjects.Message;
-
-import java.util.ArrayList;
 
 public class ChatViewController implements ViewController
 {
@@ -26,8 +25,8 @@ public class ChatViewController implements ViewController
   {
     chatViewModel.sendMessage();
     messageField.clear();
-    messages = FXCollections.observableArrayList(chatViewModel.getMessages());
-    chatBox.setItems(messages);
+    //messages = FXCollections.observableArrayList(chatViewModel.getMessages());
+    //chatBox.setItems(messages);
     // TODO: Needs Observer Pattern because it does not update when other client sends message
   }
 
@@ -40,7 +39,16 @@ public class ChatViewController implements ViewController
     viewHandler = ViewHandler.getInstance();
     chatViewModel = ViewModelFactory.getInstance().getChatViewModel();
     messageField.textProperty().bindBidirectional(chatViewModel.getMessage());
+    if (chatViewModel.loadMessages() != null)
+    {
+      chatViewModel.loadMessages().addListener(
+          (ListChangeListener<? super Message>) observable -> onNewMessage(
+              observable.getList()));
+    }
+  }
 
-
+  private void onNewMessage(ObservableList<? extends Message> list)
+  {
+    chatBox.setItems((ObservableList<Message>) list);
   }
 }
