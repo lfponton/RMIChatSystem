@@ -1,6 +1,6 @@
 package server.network;
 
-import server.model.MessageSender;
+import server.model.ChatDataModel;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
 import shared.transferobjects.Message;
@@ -18,13 +18,13 @@ import java.util.Map;
 
 public class RMIServerImplementation implements RMIServer
 {
-  private MessageSender messageSender;
+  private ChatDataModel chatDataModel;
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
 
-  public RMIServerImplementation(MessageSender messageSender) throws RemoteException
+  public RMIServerImplementation(ChatDataModel chatDataModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    this.messageSender = messageSender;
+    this.chatDataModel = chatDataModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -35,7 +35,7 @@ public class RMIServerImplementation implements RMIServer
 
   @Override public void sendMessage(Message msg)
   {
-    messageSender.sendMessage(msg);
+    chatDataModel.sendMessage(msg);
   }
 
   @Override public void registerClient(ClientCallback clientCallback)
@@ -48,12 +48,12 @@ public class RMIServerImplementation implements RMIServer
           clientCallback.newMessage((List<Message>) evt.getNewValue());
         } catch (RemoteException e) {
           e.printStackTrace();
-          messageSender.removePropertyChangeListener("NewMessage", this);
+          chatDataModel.removePropertyChangeListener("NewMessage", this);
         }
       }
     };
     listeners.put(clientCallback, listener);
-    messageSender.addPropertyChangeListener("NewMessage", listener);
+    chatDataModel.addPropertyChangeListener("NewMessage", listener);
   }
 
   @Override public void unregisterClient(ClientCallback clientCallback)
@@ -61,7 +61,7 @@ public class RMIServerImplementation implements RMIServer
     PropertyChangeListener listener = listeners.get(clientCallback);
     if (listener != null) {
       listeners.remove(clientCallback, listener);
-      messageSender.removePropertyChangeListener("NewMessage", listener);
+      chatDataModel.removePropertyChangeListener("NewMessage", listener);
     }
   }
 
@@ -72,7 +72,7 @@ public class RMIServerImplementation implements RMIServer
 
   @Override public List<Message> getMessages() throws RemoteException
   {
-    return messageSender.getMessages();
+    return chatDataModel.getMessages();
   }
 
 }

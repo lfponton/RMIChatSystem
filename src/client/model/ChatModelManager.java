@@ -8,12 +8,12 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
-public class MessageSenderManager implements MessageSender
+public class ChatModelManager implements ChatModel
 {
   private PropertyChangeSupport support = new PropertyChangeSupport(this);
   private Client client;
 
-  public MessageSenderManager(Client client)
+  public ChatModelManager(Client client)
   {
     this.client = client;
     client.startClient();

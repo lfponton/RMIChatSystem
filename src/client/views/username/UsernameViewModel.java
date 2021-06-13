@@ -1,16 +1,16 @@
 package client.views.username;
 
-import client.model.MessageSender;
+import client.model.ChatModel;
 
 public class UsernameViewModel
 {
-  private MessageSender messageSender;
+  private ChatModel chatModel;
 
-  public UsernameViewModel(MessageSender messageSender) {
-    this.messageSender = messageSender;
+  public UsernameViewModel(ChatModel chatModel) {
+    this.chatModel = chatModel;
   }
 
   public void createUser(String username) {
-    messageSender.setUsername(username);
+    chatModel.setUsername(username);
   }
 }

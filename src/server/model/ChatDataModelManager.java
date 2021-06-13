@@ -7,13 +7,13 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageSenderManager implements MessageSender
+public class ChatDataModelManager implements ChatDataModel
 {
   private PropertyChangeSupport support;
   private List<Message> messages;
 
 
-  public MessageSenderManager() {
+  public ChatDataModelManager() {
     support = new PropertyChangeSupport(this);
     messages = new ArrayList<>();
   }

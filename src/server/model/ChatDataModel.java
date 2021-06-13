@@ -5,7 +5,7 @@ import shared.util.PropertyChangeSubject;
 
 import java.util.List;
 
-public interface MessageSender extends PropertyChangeSubject
+public interface ChatDataModel extends PropertyChangeSubject
 {
   void sendMessage(Message message);
   List<Message> getMessages();

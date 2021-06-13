@@ -1,14 +1,14 @@
 package client.core;
 
-import client.model.MessageSender;
-import client.model.MessageSenderManager;
+import client.model.ChatModel;
+import client.model.ChatModelManager;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ModelFactory
 {
-  private MessageSender model;
+  private ChatModel model;
   private static ModelFactory instance;
   private static Lock lock = new ReentrantLock();
 
@@ -31,11 +31,11 @@ public class ModelFactory
     return instance;
   }
 
-  public MessageSender getDataModel() {
+  public ChatModel getDataModel() {
     if (model == null) {
       synchronized (lock) {
         if (model == null) {
-      model = new MessageSenderManager(ClientFactory.getInstance().getClient());
+      model = new ChatModelManager(ClientFactory.getInstance().getClient());
     }}}
     return model;
   }

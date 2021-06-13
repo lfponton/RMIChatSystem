@@ -1,6 +1,6 @@
 package client.views.chat;
 
-import client.model.MessageSender;
+import client.model.ChatModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -14,19 +14,19 @@ import java.util.List;
 
 public class ChatViewModel
 {
-  private MessageSender messageSender;
+  private ChatModel chatModel;
   private StringProperty message;
   private String numberOfConnections;
   private ObservableList<Message> messages;
 
 
-  public ChatViewModel(MessageSender messageSender)
+  public ChatViewModel(ChatModel chatModel)
   {
-    this.messageSender = messageSender;
+    this.chatModel = chatModel;
     message = new SimpleStringProperty();
     messages = FXCollections.observableArrayList(new ArrayList<>());
     numberOfConnections = "";
-    messageSender.addPropertyChangeListener("NewMessage", this::onNewMessage);
+    chatModel.addPropertyChangeListener("NewMessage", this::onNewMessage);
   }
 
   private void onNewMessage(PropertyChangeEvent evt)
@@ -40,12 +40,12 @@ public class ChatViewModel
   public void sendMessage()
   {
     String input = message.get();
-    messageSender.sendMessage(input);
+    chatModel.sendMessage(input);
   }
 
   public int numberOfConnections()
   {
-    return messageSender.getNumberOfConnections();
+    return chatModel.getNumberOfConnections();
   }
 
 
@@ -56,7 +56,7 @@ public class ChatViewModel
 
   public List<Message> getMessages()
   {
-    return messageSender.getMessages();
+    return chatModel.getMessages();
   }
 
   public ObservableList<Message> loadMessages() {
