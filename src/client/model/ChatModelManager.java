@@ -10,11 +10,12 @@ import java.util.List;
 
 public class ChatModelManager implements ChatModel
 {
-  private PropertyChangeSupport support = new PropertyChangeSupport(this);
+  private PropertyChangeSupport support;
   private Client client;
 
   public ChatModelManager(Client client)
   {
+    support = new PropertyChangeSupport(this);
     this.client = client;
     client.startClient();
     client.addPropertyChangeListener("NewMessage", this::onNewMessage);

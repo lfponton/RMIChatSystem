@@ -19,9 +19,10 @@ public class ChatViewController implements ViewController
   @FXML private TextField messageField;
   @FXML private Label numberOfConnections;
   @FXML private ListView<Message> chatBox;
+  private ObservableList<Message> messages;
   private ChatViewModel chatViewModel;
   private ViewHandler viewHandler;
-  ObservableList<Message> messages;
+
 
   public void sendMessageButton(ActionEvent evt)
   {
